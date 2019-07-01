@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Offer-Zone</title>
+
+  <!-- Bootstrap -->
+
+  <!-- Alternative to Bootstrap 3 Glyphicons -->
+  <!--  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+
+  <!-- Optional theme -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+  <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto:300,400|Questrial|Satisfy">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <!-- =======================================================
+    Theme Name: Hidayah
+    Theme URL: https://bootstrapmade.com/hidayah-free-simple-html-template-for-corporate/
+    Author: BootstrapMade
+    Author URL: https://bootstrapmade.com
+  ======================================================= -->
+</head>
+
+<body>
+  <div class="header">
+    <div class="bg-color">
+      <header>
+            <nav class="navbar navbar-default navbar-fixed-top">
+              <div class="container">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#lauraMenu">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">RoyalComputers</a>
+                </div>
+                <div class="collapse navbar-collapse" id="lauraMenu">
+                  <ul class="nav navbar-nav navbar-right navbar-border">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li class="active"><a href="{% url 'offers' %}">Offers</a></li>
+                    <li><a href="{% url 'contact-us' %}">Contact Us</a></li>
+                    {% if user.is_authenticated %}
+                        <li> <a class="nav-item nav-link" href="{% url 'post_new' %}">New Post</a> </li>
+                        <li> <a href="{% url 'logout' %}">Log out</a> </li>
+                        <li> <a >Welcome: {{ user.username }}</a> </li>
+                    {% else %}
+                        <li>  <a class="nav-item nav-link" href="{% url 'login' %}" aria-label="Login">
+                          <span class="fa fa-user" aria-hidden="true"></span></a> </li>
+                    {% endif %}
+                  </ul>
+                </div>
+              </div>
+            </nav>
+      </header>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 wow fadeIn delay-05s">
+            <div class="banner-text">
+                  <h2>Latest offers..!</h2>
+                </div>
+              </div>
+          </div>
+        </div>
+  <section id="content">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-md-push-2">
+              <article>
+                <div class="full-article">
+                {% for post in post_list %}
+                <div class="post-image">
+                  <div class="post-heading">
+                    <h2>{{ post.title}}</h2>
+                  </div>
+                  <img src="{{ post.image.url }}" width="640" height="480" />
+                </div>
+                <p>
+                  {{ post.text }}
+                </p>
+                <div class="bottom-article">
+                  <ul class="meta-post">
+                    <li><i class="icon-calendar"></i><a href="#"> {{ post.created_date }}</a></li>
+                    <li><i class="icon-user"></i><a href="#"> {{ post.author }}</a></li>
+                  </ul>
+                </div>
+                {% endfor %}
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+  </section>
+</div>
+</div>
+
+
+</body>

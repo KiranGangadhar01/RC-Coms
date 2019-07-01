@@ -1,0 +1,26 @@
+{% extends 'computer/base.html' %}
+
+{% block content %}
+
+<div class="header">
+  <div class="bg-color">
+      <section id="content">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-md-push-2">
+
+                <h1>New post</h1>
+
+                <form method="POST" class="post-form" enctype="multipart/form-data" class="contactForm">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-primary btn-lg">Create</button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+      </section><!-- #contact -->
+    </div>
+</div>
+{% endblock %}

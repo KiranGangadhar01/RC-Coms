@@ -1,0 +1,28 @@
+{% extends 'computer/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<section id="contact" class="section-padding wow fadeIn delay-05s">
+
+    <div class="col-md-8 col-md-push-2">
+
+      <h2>Please Login: </h2>
+      <h3>(Must be SuperUser, please check admin for issues.)</h3>
+      {% if form.errors %}
+          <p>Your username and password didn't match.Please try again!</p>
+      {% endif %}
+
+        <form method="POST" action="{% url 'login' %}">
+          {% csrf_token %}
+            {{form.as_p}}
+
+            <input type="submit" class='btn btn-primary' value="Login" />
+            <input type="hidden" name="next" value="{{ next }}" />
+
+        </form>
+    </div>
+
+</section><!-- #contact -->
+
+{% endblock %}
